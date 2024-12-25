@@ -1,0 +1,117 @@
+.room-container {
+    display: flex;   
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 110px;
+    padding: 20px;
+    margin-left: 425px;
+    margin-bottom: 450px;
+    overflow: hidden;
+    gap: 50px; 
+    border-radius: 15px; /* Rounded corners */
+  }
+  
+  .room-container div {
+    text-align: center;
+    border-radius: 25px;
+    padding: 15px;
+  }
+  
+  .room-container img {
+    width: 300px;
+    height: 300px;
+    border-radius: 30px; /* Optional: Rounded corners for images */
+  }
+  
+  .room-container h3 {
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-bottom: 7px;
+    font-size: 1em;
+    text-align: left;
+    color: white; /* Dark text for readability */
+  }
+
+  
+  div.Expand-btn  {
+    background: #a98eb2;
+    color: #fff;
+    border: none;
+    left: 447px;
+    top: 785px;
+    margin-left: 16px;
+    border-radius: 20px;
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    border-radius: 20px;
+    font-size: 1rem;
+    padding: 0 20px;          /* Left/right space inside button */
+    text-align: center;    
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  div.Expand-btn2  {
+    background: #a98eb2;
+    color: #fff;
+    border: none;
+    left: 825px;
+    top: 785px;
+    margin-left: 16px;
+    border-radius: 20px;
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    border-radius: 20px;
+    font-size: 1rem;
+    padding: 0 20px;          /* Left/right space inside button */
+    text-align: center;    
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+  
+  div.Expand-btn3  {
+    background: #a98eb2;
+    color: #fff;
+    border: none;
+    left: 1208px;
+    top: 785px;
+    margin-left: 16px;
+    border-radius: 20px;
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    border-radius: 20px;
+    font-size: 1rem;
+    padding: 0 20px;          /* Left/right space inside button */
+    text-align: center;    
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+  .expand-btn:hover {
+    background-color: #8C7A90;
+  }
+
+  
+  
+
+/* .rooms{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    margin: 50px;
+    padding: 20px;
+    width: 500px;
+    height: 200px;
+}
+
+.rooms img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20%;
+    padding: 20px;
+} */

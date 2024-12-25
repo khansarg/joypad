@@ -1,0 +1,121 @@
+/* Footer Styling */
+.footer {
+  background: linear-gradient(
+    180deg,
+    rgba(169, 142, 178, 0.55) 0%,
+    rgba(62, 39, 70, 0.55) 100%
+  );
+    color: #fff;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    flex-wrap: wrap;
+  }
+  
+  /* Bagian Kiri: Logo */
+  .footer-left {
+    flex: 1; /* Menyisakan ruang untuk bagian kiri */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .footer-logo {
+    width: 350px;
+    height: auto;
+  }
+  
+  /* Bagian Tengah: Alamat */
+  .footer-center {
+    flex: 1; /* Menempatkan alamat di tengah */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .footer-address span {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  /* Bagian Kanan: Ikon Kontak dan Info */
+  .footer-right {
+    flex: 1; /* Menyisakan ruang untuk bagian kiri */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .footer-icons {
+    display: flex;
+    flex-direction: column ;
+    gap: 15px;
+    color: #fff;
+  }
+  
+  .footer-icon img {
+    width: 24px; /* Sesuaikan ukuran gambar */
+    height: 24px; /* Sesuaikan ukuran gambar */
+    margin-right: 10px;
+    border-radius: 30%
+  }
+  
+  .footer-icon{
+    display: flex;
+    align-items: center; /* Mengatur gambar dan teks dalam satu garis secara vertikal */
+    gap: 8px; /* Jarak antar elemen (gambar dan teks) */
+  }
+  
+  .footer-icon a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .footer-icon a p{
+    color: #fff;
+  }
+  
+  .footer-icon a img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+  }
+  
+  .footer-icon a img:hover {
+    transform: scale(1.2);
+  }
+  
+  .footer-info {
+    padding: 10px;
+    font-size: 12px;
+    text-align: right;
+  }
+  
+  .aturan {
+    padding: 10px;
+  }
+  
+  .privacy-police{
+    padding-right: 20px;
+  }
+  
+  
+  .icon-footer {
+    width: 50px; /* Ukuran lebar ikon */
+    height: auto; /* Menjaga aspek rasio ikon */
+    margin-left: 10px; /* Jarak antara ikon dan elemen lainnya */
+    cursor: pointer; /* Menambahkan kursor pointer saat hover */
+    transition: transform 0.3s ease; /* Efek animasi saat ikon dihover */
+    left: 1515px
+  }
+  
+  .contact{
+    display: flex;
+    align-items: center; /* Ikon dan teks sejajar vertikal */
+    margin: 5px 0;
+  }

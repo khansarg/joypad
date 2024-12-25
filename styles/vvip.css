@@ -1,0 +1,563 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: auto;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(169, 142, 178, 0.8) 64.49999809265137%,
+      rgba(201, 141, 168, 0.68) 100%
+    );
+    background-attachment: fixed;
+    background-size: 2000;
+    background-repeat: no-repeat;
+    background-position: center;
+    max-height: 500vh; 
+  }
+  
+  header {
+    background-color: #A98EB2;
+    color: white;
+    display: flex;
+    height: 85px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  header .logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+  }
+  
+  header .logo img {
+    width: 200px;
+    height: auto;
+    margin-right: 0px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    cursor: pointer;
+    grid-gap: 20x;
+    margin-left:auto;
+    width: max-content;
+    justify-content:  flex-start, left;
+    text-shadow: 6px 6px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  nav ul li {
+    margin-left: 10px;
+    justify-content: flex-start; 
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 8px 12px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  nav ul li a:hover::after,
+  nav ul li a.active::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  nav ul li a:focus {
+    outline: none;
+    border-bottom: 1px solid white;
+  }
+  
+  .header-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: invert(1);
+    width: 40px; /* Ukuran lingkaran */
+    height: 40px; /* Ukuran lingkaran */
+    border-radius: 50%; /* Membuat sudut menjadi lingkaran */
+    overflow: hidden; /* Memastikan gambar tidak keluar dari lingkaran */
+  }
+  
+  .profile-circle {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Agar gambar sesuai dengan lingkaran */
+  }
+  
+  .user-profile{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .username {
+    color: white;
+    text-decoration: none;
+    margin-left: 0px;
+    margin-right: 15px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+    .button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      outline: none;
+      box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .image-container {
+      border-radius: 20px;
+      margin-top: 25px;
+      display: flex; /* Mengatur tata letak secara horizontal */
+      gap: 50px; /* Memberikan jarak antar gambar */
+      align-items: center; /* Menjaga gambar sejajar secara vertikal */
+    }
+  
+    .image-container img {
+      max-width: 1270px;
+      height: 570px;
+      width: 100%;
+      display: block;
+      margin: 55px auto;
+      border-radius: 50px;
+      transition: transform 0.3s ease-in-out;
+    }
+    img:hover {
+      transform: scale(1.05);
+    }
+    
+    @media (max-width: 768px) {
+      .img {
+        margin: 125px auto;
+        border-radius: 20px;
+      }
+    }
+    
+    .type{
+      display: flex;
+      filter: invert(1);
+      justify-content: space-between;
+      max-width: 1250px;
+      margin: 25px auto;
+      margin-bottom: 30px;
+      border-radius: 45px;
+    }
+  
+    .room-info {
+      text-align: center;
+    }
+    
+    .room-title {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      filter: invert(1);
+    }
+    
+    .room-price {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+    
+    .room-features {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .feature {
+      background-color: #A98EB2;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      margin: 0 0.5rem;
+    }
+    
+    .book-btn {
+      background: #a98eb2;
+      filter: invert(1);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      width: 190px;
+      height: 53px;
+      border-radius: 20px;
+      padding: 0.75rem 2rem;
+      font-size: 1.6rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+    
+    .book-btn:hover {
+      background-color: #8C7A90;
+    }
+  
+    nav ul li b {
+      text-decoration: none;
+      font-weight: normal;
+      color: white;
+      left: -10px;
+      font-size: 27px;
+      justify-content: space-between;
+      margin-right: 30px;
+      margin-top: 100px;
+      padding-bottom: 10px;
+      position: relative;
+      transition: all 0.3s ease;
+  }
+  nav ul li b:hover::after,
+  nav ul li b.active::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  nav ul li b:focus {
+    outline: none;
+    border-bottom: 1px solid white;
+  }
+  
+  .facilities {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Poppins-Medium", sans-serif;
+    position: absolute;
+    left: 330px;
+    width: 174px;
+    height: 46px;
+  }
+  
+  
+  .features-container {
+    display: grid;
+    grid-template-columns: repeat(4, 20%); /* 4 kolom, 1 bagian per kolom */
+    grid-gap: 20px; /* Jarak antar item */
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 100%;
+    margin-top: 98px;
+    margin-left: 100px;
+    margin-bottom: 450px;
+    overflow: hidden;
+  }
+  
+  .features-container > div {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    grid-gap: 1x;
+    margin: 10%;
+  }
+  
+  .features-container img {
+    max-width: 140px; /* Atur ukuran gambar */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    margin: 1px;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+  
+  }
+  
+  .features-container h3 {
+    margin: 40px;
+    color: white;
+    font-weight: normal;
+    font-size: 16px; /* Atur ukuran judul */
+  }
+  
+  .features-container h4 {
+    margin-bottom: 40px;
+    justify-content: center;
+    color: white;
+    font-weight: normal;
+    font-size: 16px; /* Atur ukuran judul */
+  }
+  
+  .features-container h5 {
+    margin: 58px;
+    color: white;
+    font-weight: normal;
+    font-size: 16px; /* Atur ukuran judul */
+  }
+
+  .features-container h6 {
+    margin-top: 60px;
+    color: white;
+    font-weight: normal;
+    font-size: 16px; /* Atur ukuran judul */
+  }
+  
+    .footer {
+    background: linear-gradient(
+      180deg,
+      rgba(169, 142, 178, 0.55) 0%,
+      rgba(62, 39, 70, 0.55) 100%
+    );
+    border-radius: 0px;
+    width: 100%;
+    align-items: center;
+    height: 400px;
+    position: sticky;
+    bottom: 0;
+    justify-content: space-between;
+    left: -149px;
+    top: 2576px;
+    overflow: hidden;
+  }
+  
+  .journey-2 {
+    width: 418.01px;
+    height: 100.82px;
+    position: absolute;
+    align-items: left;
+    left: 90px;
+    top: 30px;
+    left: 150px;
+    object-fit: cover;
+  }
+  
+  ._2024-joypad-journey-all-rights-reserved {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    position: absolute;
+    left: 245.35px;
+    top: 205.48px;
+    width: 346.52px;
+    height: 29.08px;
+  }
+  .whatsapp {
+    border-radius: 10px;
+    width: 44.68px;
+    height: 42.66px;
+    position: absolute;
+    left: 1515px;
+    top: 220px;
+    object-fit: cover;
+  }
+  .joypadjourney-gmail-com {
+    color: #ffffff;
+    text-align: center;
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    text-decoration: underline;
+    position: absolute;
+    left: 1560px;
+    top: 139.62px;
+    width: 277.02px;
+    height: 28.11px;
+  }
+  .tlp {
+    color: #ffffff;
+    text-align: center;
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    position: absolute;
+    left: 1573px;
+    top: 285.13px;
+    width: 168.79px;
+    height: 28.11px;
+  }
+  .privacy-policy {
+    color: #ffffff;
+    text-align: center;
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    position: absolute;
+    left: 209.6px;
+    top: 288.92px;
+    width: 168.79px;
+    height: 28.11px;
+  }
+  .terms-conditions {
+    color: #ffffff;
+    text-align: center;
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    position: absolute;
+    left: 380.11px;
+    top: 288.92px;
+    width: 234.32px;
+    height: 28.11px;
+  }
+  .joypad-journey {
+    color: #ffffff;
+    text-align: center;
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    position: absolute;
+    left: 1541px;
+    top: 212.33px;
+    width: 225.39px;
+    height: 31.99px;
+  }
+  .alamat {
+    color: #ffffff;
+    text-align: center;
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    position: absolute;
+    left: 720px;
+    top: 185px;
+    width: 500px;
+    height: 78.52px;
+  }
+  .insta {
+    width: 44.68px;
+    height: 43.62px;
+    position: absolute;
+    left:  1515px;
+    top: 149px;
+    object-fit: cover;
+  }
+  .div {
+    color: #fcfcfc;
+    text-align: left;
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    position: absolute;
+    left: 210px;
+    top: 192px;
+    width: 20.85px;
+    height: 29.08px;
+  }
+  .google {
+    border-radius: 10px;
+    width: 44.68px;
+    height: 41.22px;
+    position: absolute;
+    left: 1515px;
+    top: 78px;
+    object-fit: cover;
+  }
+
+  .games-container {
+    display: flex;   
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 110px;
+    padding: 20px;
+    margin-left: 335px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    gap: 50px; 
+    flex-wrap: wrap;
+    border-radius: 15px; /* Rounded corners */
+  }
+  
+  .games-container div {
+    text-align: center;
+    background-color: #a98eb2;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .games-container img {
+    max-width: 100%;
+    height: 280px;
+    border-radius: 5px; /* Optional: Rounded corners for images */
+  }
+  
+  .games-container h3 {
+    margin-top: 15px;
+    margin-left: 5px;
+    font-size: 1em;
+    text-align: left;
+    color: white; /* Dark text for readability */
+  }
+
+  .games-container2 {
+    display: flex;   
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 110px;
+    padding: 20px;
+    margin-left: 335px;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    overflow: hidden;
+    gap: 50px; 
+    flex-wrap: wrap;
+    border-radius: 15px; /* Rounded corners */
+  }
+  
+  .games-container2 div {
+    text-align: center;
+    background-color: #a98eb2;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .games-container2 img {
+    max-width: 100%;
+    height: 280px;
+    border-radius: 5px; /* Optional: Rounded corners for images */
+  }
+  
+  .games-container2 h3 {
+    margin-top: 15px;
+    margin-left: 5px;
+    font-size: 1em;
+    text-align: left;
+    color: white; /* Dark text for readability */
+  }
+  .space{
+    margin-bottom: 420px;
+  }
+  

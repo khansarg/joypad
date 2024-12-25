@@ -1,0 +1,19 @@
+/* Warna latar untuk tanggal yang dipilih */
+.react-calendar__tile--active {
+    background-color: #4caf50; /* Hijau untuk tanggal aktif */
+    color: white; /* Teks putih */
+    border-radius: 8px; /* Membuat bulat di pojok */
+  }
+  
+  /* Warna latar untuk akhir pekan */
+  .react-calendar__month-view__days__day--weekend {
+    color: red; /* Warna teks merah untuk Sabtu dan Minggu */
+    background-color: #ffebee; /* Latar belakang merah muda */
+  }
+  
+  /* Hover efek untuk tanggal */
+  .react-calendar__tile:hover {
+    background-color: #ddd; /* Latar abu-abu saat di-hover */
+    color: black; /* Teks hitam */
+  }
+  
