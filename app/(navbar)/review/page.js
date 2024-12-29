@@ -214,75 +214,94 @@ const Review = () => {
   };
 
   return (
-    <div className="min-h-screen bg-purple-50">
+    <div className="min-h-screen font-['Poppins'] w-full bg-fixed bg-[length:2000px] bg-no-repeat bg-center max-h-[500vh]">
       <Header />
-      <div className='rating-container'>
-        <main className="max-w-4xl mx-auto p-6">
-          <section className="rating-card mb-8">
-            <h2 className="rating-title">Rating</h2>
-            <div className="rating-summary">
-              <div className="rating-score">
-                <span className="score">{calculateAverageRating()}</span>
-                <span className="star-large">★</span>
-              </div>
-              <p className="review-count">
-                Based on {ratings.reduce((acc, curr) => acc + curr.count, 0)} reviews
-              </p>
-            </div>
-            <div className="rating-bars">
-              {ratings.map((rating) => (
-                <div key={rating.stars} className="rating-bar-row">
-                  <div className="star-container">
-                    {renderStars(rating.stars)}
-                  </div>
-                  <div className="progress-bar">
-                    <div className="progress-fill" style={{ width: `${(rating.count / 150) * 100}%` }} />
-                    </div>
-                    <span className="rating-count">{rating.count}</span>
-                  </div>,
-                  <p className="review-count">
-                    Based on {ratings.reduce((acc, curr) => acc + curr.count, 0)} reviews
-                  </p>))}
-            </div>
-            <div className="rating-bars">
-              {ratings.map((rating) => (
-                <div key={rating.stars} className="rating-bar-row">
-                  <div className="star-container">
-                    {renderStars(rating.stars)}
-                  </div>
-                  <div className="progress-bar">
-                    <div
-                      className="progress-fill"
-                      style={{ width: `${(rating.count / 150) * 100}%` }} />
-                  </div>
-                  <span className="rating-count">{rating.count}</span>
+      <div className="max-w-4xl mx-auto p-6 my-14 mt-[150px]">
+        {/* Rating Summary Card */}
+        <div className="bg-[#EBDFEF] rounded-[24px] p-8 mb-6">
+          <h2 className="text-gray-600 text-2xl font-medium mb-6">Rating</h2>
+          
+          <div className="flex items-baseline gap-3 mb-4">
+            <span className="text-[3.5rem] font-medium text-gray-600">4.5</span>
+            <span className="text-yellow-400 text-2xl">★</span>
+          </div>
+          
+          <p className="text-gray-500 text-sm mb-8">Based on 150 reviews</p>
+
+          <div className="flex flex-col gap-4">
+            {ratings.map((rating) => (
+              <div key={rating.stars} className="flex items-center gap-3">
+                <div className="flex-none w-[120px]">
+                  {[...Array(5)].map((_, index) => (
+                    <span 
+                      key={index} 
+                      className={`text-lg ${index < rating.stars ? 'text-yellow-400' : 'text-yellow-400'}`}
+                    >
+                      {index < rating.stars ? "★" : "☆"}
+                    </span>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            {reviews.map((review, index) => (
-              <ReviewCard key={review.id} review={review} index={index} />
+                <div className="flex-grow h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-pink-300 rounded-full transition-all duration-300"
+                    style={{ width: `${(rating.count / 150) * 100}%` }}
+                  />
+                </div>
+                <span className="flex-none w-8 text-right text-gray-500 text-sm">
+                  {rating.count}
+                </span>
+              </div>
             ))}
+          </div>
+        </div>
 
-        </section>
+      {/* Review cards */}
+      <div className="space-y-4">
+        {reviews.map((review) => (
+          <div 
+            key={review.id}
+            className="bg-[#EBDFEF] rounded-[24px] p-8"
+          >
+            <div className="flex justify-between items-start mb-4">
+              <div className="flex items-center gap-3">
+                <img
+                  src="image/user.png"
+                  alt={review.author}
+                  className="w-10 h-10 rounded-full"
+                />
+                <div>
+                  <h3 className="font-[500] text-[#374151]">{review.author}</h3>
+                  <div className="text-[#fbbf24] text-sm">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i}>
+                        {i < review.rating ? "★" : "☆"}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <span className="text-[#6b7280] text-sm">{review.date}</span>
+            </div>
+            <h4 className="font-[500] text-[#374151] mb-2">{review.title}</h4>
+            <p className="text-[#4b5563] leading-[1.625]">{review.content}</p>
+          </div>
+        ))}
+      </div>
 
-        <section>
-          {reviews.map((review, index) => (
-            <ReviewCard key={review.id} review={review} index={index} />
-          ))}
-        </section>
+      {/* Write review button */}
+      <button 
+        onClick={() => setShowReviewModal(true)}
+        className="fixed bottom-5 right-5 bg-[#F472B6] text-white px-6 py-2 rounded-full flex items-center gap-2 shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1)] z-[1000]"
+      >
+        <span>✎</span>
+        Write a review
+      </button>
 
-        <button onClick={() => setShowReviewModal(true)} className="button">
-          <span className="text-xl">✎</span>
-          Write a review
-        </button>
-        {showReviewModal && <ReviewModal />}
-      </main>
-    </div><Footer />
+      {showReviewModal && <ReviewModal />}
     </div>
-  );
-};
+    <Footer />
+  </div>
+);
+}
 
 export default Review;

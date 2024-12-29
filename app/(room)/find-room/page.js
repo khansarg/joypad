@@ -29,6 +29,8 @@ const findRoom = () => {
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [startDateTime, setStartDateTime] = useState(null);
+  const [endDateTime, setEndDateTime] = useState(null);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -37,13 +39,22 @@ const findRoom = () => {
 
   useEffect(() => {
     const fetchRooms = async () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const startDateTime = urlParams.get("startDateTime");
-      const endDateTime = urlParams.get("endDateTime");
+      let startDateTime = localStorage.getItem("startDateTime");
+      let endDateTime = localStorage.getItem("endDateTime");
+      const storedDate = localStorage.getItem("date");
+      const storedTime = localStorage.getItem("time");
   
-      // Validasi format tanggal
+      if (!startDateTime || !endDateTime) {
+        if (storedDate && storedTime) {
+          const [fromTime, untilTime] = storedTime.split(" - ");
+          startDateTime = `${storedDate}T${fromTime}`;
+          endDateTime = `${storedDate}T${untilTime}`;
+        }
+      }
+  
+      // Validasi format tanggal dan waktu
       const isValidDateTimeFormat = (dateTime) => {
-        const regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/;
+        const regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?$/; // Format ISO-8601
         return regex.test(dateTime);
       };
   
@@ -55,6 +66,17 @@ const findRoom = () => {
         console.error("Invalid date-time parameters:", { startDateTime, endDateTime });
         return;
       }
+  
+      setStartDateTime(startDateTime);
+      setEndDateTime(endDateTime);
+  
+      const date = new Date(startDateTime.split("T")[0]); // Ambil tanggal dari `startDateTime`
+      setSelectedDate(date);
+  
+      const from = startDateTime.split("T")[1].slice(0, 5); // HH:mm dari `startDateTime`
+      const until = endDateTime.split("T")[1].slice(0, 5); // HH:mm dari `endDateTime`
+      setFromTime(from);
+      setUntilTime(until);
   
       try {
         const token = localStorage.getItem("token");
@@ -95,6 +117,7 @@ const findRoom = () => {
     fetchRooms();
   }, []);
   
+  
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -127,7 +150,7 @@ const findRoom = () => {
                 className="placeholder"
                 onClick={() => setShowTimeDropdowns(!showTimeDropdowns)}
               >
-                Add times
+                {selectedDate ? selectedDate.toDateString() : "Add dates"}
               </button>
               {showTimeDropdowns && (
                 <div className="time-dropdown-container">
@@ -205,7 +228,10 @@ const findRoom = () => {
         <h3>{room.roomName.toUpperCase()} ROOM</h3>
         <p>Price: {room.pricePerHour} per hour</p>
         <a href={`/${room.roomName.toLowerCase()}-room`}>
-          <div className="expand-btn">Expand</div>
+          <div className="expand-btn" onClick={() => {
+    const query = `?roomName=${room.roomName}&startDateTime=${startDateTime}&endDateTime=${endDateTime}`;
+    window.location.href = `/${room.roomName.toLowerCase()}-room${query}`;
+  }}>Expand</div>
         </a>
       </div>
     ))

@@ -1,6 +1,9 @@
 "use client"; // Menandai file ini sebagai komponen klien
 
 import React, { useState } from "react";
+import Header from "../../header";
+import Footer  from "../../footer";
+import Link from 'next/link';
 import "../../../styles/register.css"
 import { useRouter } from "next/navigation";
 
@@ -83,13 +86,42 @@ export default function SignupPage() {
       <div className="form-container">
         <h1>Create Your Account</h1>
 
-
-        <form className="signup-form">
-          <input type="email" className="form-input" placeholder="Email Address" />
-          <input type="text" className="form-input" placeholder="Phone Number" />
-          <input type="text" className="form-input" placeholder="First Name" />
-          <input type="text" className="form-input" placeholder="Last Name" />
-
+        <form className="signup-form" onSubmit={handleSubmit}>
+        <input
+            type="text"
+            className="form-input"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="text"
+            className="form-input"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <input
+            type="text"
+            className="form-input"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <input
+            type="text"
+            className="form-input"
+            placeholder="Phone Number"
+            value={phoneNum}
+            onChange={(e) => setPhoneNum(e.target.value)}
+          />
+          <input
+            type="email"
+            className="form-input"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <div className="password-container">
             <input
               type={showPassword ? "text" : "password"}

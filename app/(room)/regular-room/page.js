@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from "../../header";
 import Footer from "../../footer";
 import Link from 'next/link';
@@ -8,11 +8,51 @@ import "../../../styles/regular.css";
 
 const RegularRoom = () => {
     const [activeSection, setActiveSection] = useState('facilities');
+    const [roomDetails, setRoomDetails] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [startDateTime, setStartDateTime] = useState("");
+    const [endDateTime, setEndDateTime] = useState("");
 
     const handleNavClick = (section, e) => {
         e.preventDefault();
         setActiveSection(section);
     };
+    useEffect(() => {
+        const startDateTime = localStorage.getItem("startDateTime");
+        const endDateTime = localStorage.getItem("endDateTime");
+        if (startDateTime && endDateTime) {
+            setStartDateTime(startDateTime);
+            setEndDateTime(endDateTime);
+            console.log("Start DateTime:", startDateTime);
+            console.log("End DateTime:", endDateTime);
+          } else {
+            console.warn("Missing startDateTime or endDateTime in query parameters.");
+          }
+        const fetchRoomDetails = async () => {
+          try {
+            const response = await fetch("http://localhost:8080/api/reservations/room-details?roomName=Regular", {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`, // Pastikan token disimpan di localStorage
+                "Content-Type": "application/json",
+              },
+            });
+            if (!response.ok) throw new Error("Failed to fetch room details");
+    
+            const data = await response.json();
+            setRoomDetails(data);
+          } catch (err) {
+            setError(err.message);
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchRoomDetails();
+      }, []);
+      if (loading) return <div>Loading room details...</div>;
+      if (error) return <div>Error: {error}</div>;
+    
 
     const renderContent = () => {
         if (activeSection === 'facilities') {
@@ -94,11 +134,16 @@ const RegularRoom = () => {
                 <div className="type">
                     <div className="room-info">
                         <h1 className="room-title">REGULAR ROOM</h1>
-                        <p className="room-price">Rp. 20.000/hour</p>
+                        <p className="room-price">Rp. {roomDetails.pricePerHour.toLocaleString("id-ID")}/hour</p>
                     </div>
                     <div>
-                        <Link href="/booking-form">
-                            <button className="book-btn">BOOK</button>
+                        <Link href="/bookingformpromo">
+                            <button className="book-btn" onClick={() => {
+                                const roomName = "Regular";
+                                localStorage.setItem("roomName", roomName);
+                                const query = `?roomName=${roomName}&startDateTime=${startDateTime}&endDateTime=${endDateTime}`;
+                                window.location.href = `/bookingformpromo${query}`;
+                                }}>BOOK</button>
                         </Link>
                     </div>
                 </div>

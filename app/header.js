@@ -1,19 +1,20 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-
+import React, { useState, useEffect } from "react";
 import "../styles/header.css";
 import Link from "next/link";
-
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [username, setUsername] = useState("Guest");
+  const pathname = usePathname();
 
   const toggleDropdown = () => {
     console.log("Dropdown toggled"); // Debugging
     setDropdownVisible(!dropdownVisible);
   };
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       const token = localStorage.getItem("token");
@@ -24,7 +25,7 @@ const Header = () => {
               Authorization: `Bearer ${token}`,
             },
           });
-  
+
           if (response.ok) {
             const userData = await response.json();
             console.log("User data:", userData);
@@ -37,16 +38,20 @@ const Header = () => {
         }
       }
     };
-  
+
     fetchUserProfile();
   }, []);
-  const handleLogout = () => {
-    // Hapus token dari localStorage
-    localStorage.removeItem("token");
 
-    // Redirect ke halaman login
+  const handleLogout = () => {
+    localStorage.clear();
     window.location.href = "/";
   };
+
+  // Function to determine if a link is active
+  const isLinkActive = (path) => {
+    return pathname === path;
+  };
+
   return (
     <header>
       <div className="navbar">
@@ -56,17 +61,26 @@ const Header = () => {
         <nav>
           <ul>
             <li>
-              <a href="/customer/homepage" id="home" className="nav-link active">
+              <Link 
+                href="/customer/homepage" 
+                className={`nav-link ${isLinkActive('/customer/homepage') ? 'active' : ''}`}
+              >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/my-reservation" id="myReservation" className="nav-link">
+              <Link 
+                href="/myreservation" 
+                className={`nav-link ${isLinkActive('/myreservation') ? 'active' : ''}`}
+              >
                 My Reservation
-              </a>
+              </Link>
             </li>
             <li>
-              <Link href="/review" id="review" className="nav-link">
+              <Link 
+                href="/review" 
+                className={`nav-link ${isLinkActive('/review') ? 'active' : ''}`}
+              >
                 Review
               </Link>
             </li>
@@ -87,14 +101,14 @@ const Header = () => {
           <div className="user-profile">
             <li>
               <a className="username" id="username" onClick={toggleDropdown}>
-              {username}
+                {username}
               </a>
               <div
                 className={`dropdown-content ${
                   dropdownVisible ? "visible" : ""
                 }`}
               >
-                <a href="/notification">Notification</a>
+                <Link href="/notification">Notification</Link>
                 <a href="/" onClick={handleLogout}>Log Out</a>
               </div>
             </li>

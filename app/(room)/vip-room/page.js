@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from "../../header";
 import Footer from "../../footer";
 import Link from 'next/link';
@@ -8,11 +8,61 @@ import "../../../styles/vip.css";
 
 const VipRoom = () => {
     const [activeSection, setActiveSection] = useState('facilities');
+    const [roomDetails, setRoomDetails] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [startDateTime, setStartDateTime] = useState("");
+    const [endDateTime, setEndDateTime] = useState("");
 
     const handleNavClick = (section, e) => {
         e.preventDefault();
         setActiveSection(section);
     };
+    useEffect(() => {
+        const startDateTime = localStorage.getItem("startDateTime");
+        const endDateTime = localStorage.getItem("endDateTime");
+            if (startDateTime && endDateTime) {
+                setStartDateTime(startDateTime);
+                setEndDateTime(endDateTime);
+                console.log("Start DateTime:", startDateTime);
+                console.log("End DateTime:", endDateTime);
+              } else {
+                console.warn("Missing startDateTime or endDateTime in query parameters.");
+              }
+        const fetchRoomDetails = async () => {
+          try {
+            const roomName = "VIP";
+            console.log("Fetching details for room:", roomName);
+      
+            const response = await fetch(`http://localhost:8080/api/reservations/room-details?roomName=${roomName}`, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json",
+              },
+            });
+      
+            if (!response.ok) {
+              console.error("Response status:", response.status);
+              throw new Error("Failed to fetch room details");
+            }
+      
+            const data = await response.json();
+            console.log("Room details fetched:", data);
+            setRoomDetails(data);
+          } catch (err) {
+            console.error("Error fetching room details:", err.message);
+            setError(err.message);
+          } finally {
+            setLoading(false);
+          }
+        };
+      
+        fetchRoomDetails();
+      }, []);
+      
+          if (loading) return <div>Loading room details...</div>;
+          if (error) return <div>Error: {error}</div>;
+        
 
     const renderContent = () => {
         if (activeSection === 'facilities') {
@@ -120,11 +170,16 @@ const VipRoom = () => {
                 <div className="type">
                     <div className="room-info">
                         <h1 className="room-title">VIP ROOM</h1>
-                        <p className="room-price">Rp. 35.000/hour</p>
+                        <p className="room-price">Rp. {roomDetails.pricePerHour.toLocaleString("id-ID")}/hour</p>
                     </div>
                     <div>
                         <Link href="/booking-form">
-                            <button className="book-btn">BOOK</button>
+                            <button className="book-btn" onClick={() => {
+                                const roomName = "VIP";
+                                localStorage.setItem("roomName", roomName);
+                                const query = `?roomName=${roomName}&startDateTime=${startDateTime}&endDateTime=${endDateTime}`;
+                                window.location.href = `/bookingformpromo${query}`;
+                                }}>BOOK</button>
                         </Link>
                     </div>
                 </div>

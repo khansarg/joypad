@@ -96,9 +96,9 @@ export default function HomePage() {
             const startDateTime = `${selectedDate.toISOString().split("T")[0]}T${fromTime}:00`;
             const endDateTime = `${selectedDate.toISOString().split("T")[0]}T${untilTime}:00`;
 
-            const query = `?startDateTime=${startDateTime}&endDateTime=${endDateTime}`;
-
-            window.location.href = `/find-room${query}`;
+            localStorage.setItem("startDateTime", startDateTime);
+            localStorage.setItem("endDateTime", endDateTime);
+            window.location.href = `/find-room`;
             }}
 >
             Find Room
