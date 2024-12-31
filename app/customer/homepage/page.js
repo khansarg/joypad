@@ -93,12 +93,22 @@ export default function HomePage() {
             id="find"
             className="find-room-button"
             onClick={() => {
-            const startDateTime = `${selectedDate.toISOString().split("T")[0]}T${fromTime}:00`;
-            const endDateTime = `${selectedDate.toISOString().split("T")[0]}T${untilTime}:00`;
-
-            localStorage.setItem("startDateTime", startDateTime);
-            localStorage.setItem("endDateTime", endDateTime);
-            window.location.href = `/find-room`;
+              if (!selectedDate || !fromTime || !untilTime) {
+                alert("Please select a valid date and time.");
+                return;
+              }
+            
+              const startDateTime = `${selectedDate.toLocaleDateString("sv-SE")}T${fromTime}:00`;
+              const endDateTime = `${selectedDate.toLocaleDateString("sv-SE")}T${untilTime}:00`;
+            
+              localStorage.setItem("startDateTime", startDateTime); // Simpan waktu mulai
+              localStorage.setItem("endDateTime", endDateTime); // Simpan waktu selesai
+            
+              console.log("Start DateTime:", startDateTime);
+              console.log("End DateTime:", endDateTime);
+            
+              const query = `?startDateTime=${startDateTime}&endDateTime=${endDateTime}`;
+              window.location.href = `/find-room${query}`;
             }}
 >
             Find Room

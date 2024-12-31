@@ -25,10 +25,41 @@ const Pembayaran = () => {
     setTotal(parseFloat(localStorage.getItem("total")) || 0);
     setPrice(parseFloat(localStorage.getItem("pricePerHour")) || 0);
   }, []);
-  const handleNext = () => {
-    setShowPopup(true);
+  
+  const handlePaymentConfirmation = async () => {
+    const token = localStorage.getItem("token"); // Ambil token dari localStorage
+  
+    if (!token) {
+      alert("You are not logged in. Please log in and try again.");
+      return;
+    }
+  
+    try {
+      const response = await fetch("http://localhost:8080/api/payments/confirm", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Tambahkan Authorization Header
+        },
+        body: JSON.stringify({ reservationID }), // Kirim reservationID sebagai body
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to confirm payment.");
+      }
+  
+      const result = await response.json();
+      console.log("Payment confirmation result:", result);
+  
+      // Tampilkan popup konfirmasi pembayaran
+      setShowPopup(true);
+    } catch (error) {
+      console.error("Error confirming payment:", error.message);
+      alert("Payment failed. Please try again.");
+    }
   };
-
+  
+  
   const handleClosePopup = () => {
     setShowPopup(false);
   };
@@ -89,7 +120,7 @@ const Pembayaran = () => {
             <span className="valuetot">Rp. {total.toLocaleString("id-ID")}</span>
           </div>
           <div className="buttonGroup">
-            <button className="customButton" onClick={handleNext}>
+            <button className="customButton" onClick={handlePaymentConfirmation}>
               Bayar Sekarang
             </button>
           </div>
@@ -108,7 +139,7 @@ const Pembayaran = () => {
               </div>
               <h2>Payment Successfully!</h2>
               <p>
-                <a href="/reservation">Check your reservation</a>
+                <a href="/myreservation">Check your reservation</a>
               </p>
               <button className="closeButton" onClick={handleClosePopup}>
                 Close

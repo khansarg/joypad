@@ -25,7 +25,9 @@ header {
   color: white;
   display: flex;
   height: 85px;
+  top: 0;
   width: 100%;
+  z-index: 1000;
   position: fixed;
   justify-content: space-between;
   align-items: center;

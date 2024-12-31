@@ -4,6 +4,7 @@ import React from "react";
 import Header from "../../header"; 
 import { useState, useEffect } from "react";
 import Link from 'next/link';
+import { useRouter } from "next/navigation";
 
 const BookingForm = () => {
   const [roomDetails, setRoomDetails] = useState(null);
@@ -15,7 +16,11 @@ const BookingForm = () => {
   const [total, setTotal] = useState(0);
   const [roomName, setRoomName] = useState("");
   const [durationInHours, setDurationInHours] = useState(null);
+  const router = useRouter(); // Inisialisasi router
 
+  const handleNext = () => {
+    router.push("/pembayaranpromo"); // Navigasi ke halaman pembayaran
+  };
   useEffect(() => {
     const room = localStorage.getItem("roomName");
     const startDateTime = localStorage.getItem("startDateTime");
@@ -162,15 +167,22 @@ const BookingForm = () => {
       localStorage.removeItem("subtotal");
       localStorage.removeItem("discount");
       localStorage.removeItem("total");
+      localStorage.removeItem("date");
+      localStorage.removeItem("time");
+      localStorage.removeItem("duration");
+      localStorage.removeItem("startDateTime");
+      localStorage.removeItem("endDateTime");
+      localStorage.removeItem("roomName");
+      localStorage.removeItem("room");
 
-      // Kembali ke halaman sebelumnya
-      window.history.back();
+      // Kembali ke halaman homepage
+      window.location.href = "/customer/homepage";
     } catch (err) {
       console.error("Error deleting reservation:", err);
     }
   }}>BACK</button>
-            <Link href="/pembayaranpromo">
             <button className="customButton" onClick={() => {
+                handleNext();
                 // Simpan data ke localStorage
                 localStorage.setItem("reservationID", reservationID); // Ganti dengan ID yang sesuai
                 localStorage.setItem("room", roomDetails.roomName);
@@ -180,11 +192,11 @@ const BookingForm = () => {
                 localStorage.setItem("subtotal", subtotal);
                 localStorage.setItem("discount", discount);
                 localStorage.setItem("total", total);
+                localStorage.setItem("pricePerHour", roomDetails.pricePerHour);
 
                 // Arahkan ke halaman pembayaran
-                window.location.href = "/pembayaranpromo";
+                
             }}>NEXT</button>
-            </Link>
           </div>
         </div>
       </div>

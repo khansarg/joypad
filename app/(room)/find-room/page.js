@@ -38,19 +38,14 @@ const findRoom = () => {
   };
 
   useEffect(() => {
-    const fetchRooms = async () => {
-      let startDateTime = localStorage.getItem("startDateTime");
-      let endDateTime = localStorage.getItem("endDateTime");
-      const storedDate = localStorage.getItem("date");
-      const storedTime = localStorage.getItem("time");
+    const savedDate = localStorage.getItem("selectedDate");
+    if (savedDate) {
+      setSelectedDate(new Date(savedDate));
+    }
   
-      if (!startDateTime || !endDateTime) {
-        if (storedDate && storedTime) {
-          const [fromTime, untilTime] = storedTime.split(" - ");
-          startDateTime = `${storedDate}T${fromTime}`;
-          endDateTime = `${storedDate}T${untilTime}`;
-        }
-      }
+    const fetchRooms = async () => {
+      const startDateTime = localStorage.getItem("startDateTime");
+      const endDateTime = localStorage.getItem("endDateTime");
   
       // Validasi format tanggal dan waktu
       const isValidDateTimeFormat = (dateTime) => {
@@ -188,9 +183,10 @@ const findRoom = () => {
                     return;
                   }
                 
-                  const startDateTime = `${selectedDate.toISOString().split("T")[0]}T${fromTime}:00`;
-                  const endDateTime = `${selectedDate.toISOString().split("T")[0]}T${untilTime}:00`;
-                
+                  const startDateTime = `${selectedDate.toLocaleDateString("sv-SE")}T${fromTime}:00`;
+                  const endDateTime = `${selectedDate.toLocaleDateString("sv-SE")}T${untilTime}:00`;
+                  localStorage.setItem("startDateTime", startDateTime)
+                  localStorage.setItem("endDateTime", endDateTime); // Simpan waktu selesai
                   // Validasi format
                   const isValidDateTimeFormat = (dateTime) => {
                     const regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/; // Regex untuk format YYYY-MM-DDTHH:mm:ss

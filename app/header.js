@@ -30,6 +30,7 @@ const Header = () => {
             const userData = await response.json();
             console.log("User data:", userData);
             setUsername(userData.username);
+            localStorage.setItem("username", userData.username)
           } else {
             console.error("Failed to fetch user profile");
           }
@@ -108,7 +109,7 @@ const Header = () => {
                   dropdownVisible ? "visible" : ""
                 }`}
               >
-                <Link href="/notification">Notification</Link>
+               
                 <a href="/" onClick={handleLogout}>Log Out</a>
               </div>
             </li>

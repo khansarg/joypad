@@ -3,13 +3,20 @@
 import { useState } from "react";
 import "../styles/header_admin.css";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Header_admin = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const pathname = usePathname();
 
   const toggleDropdown = () => {
     console.log("Dropdown toggled"); // Debugging
     setDropdownVisible(!dropdownVisible);
+  };
+
+   // Function to determine if a link is active
+   const isLinkActive = (path) => {
+    return pathname === path;
   };
 
   return (
@@ -26,12 +33,18 @@ const Header_admin = () => {
           <nav>
             <ul>
               <li>
-                <a href="/admin/home_admin" id="home" className="nav-link active">
+                <Link 
+                  href="/admin/home_admin" 
+                  className={`nav-link ${isLinkActive('/admin/home_admin') ? 'active' : ''}`}
+                >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <Link href="/admin/review" id="review" className="nav-link">
+                <Link 
+                  href="/admin/review" 
+                  className={`nav-link ${isLinkActive('/admin/review') ? 'active' : ''}`}
+                >
                   Review
                 </Link>
               </li>

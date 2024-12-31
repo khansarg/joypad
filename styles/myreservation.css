@@ -1,11 +1,12 @@
-
 .main-card {
     background-color: white;
     border-radius: 30px;
     padding: 50px;
     margin: 90px 100px;
-    height: 590px;
+    margin-top: 160px;
+    min-height: 590px; /* Gunakan min-height agar tinggi menyesuaikan konten */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease; /* Transisi halus */
 }
 
 .card-title {
@@ -16,14 +17,18 @@
     font-weight: bold;
 }
 
+/* Grid yang responsif dan fleksibel */
 .reservation-grid {
     display: grid;
-    grid-template-columns: repeat(6, 15%);
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Dinamis */
     gap: 15px;
     margin-top: 25px;
     justify-content: center;
+    align-items: stretch; /* Agar kotak fleksibel sesuai konten */
+    transition: all 0.3s ease; /* Transisi halus */
 }
 
+/* Konten di dalam grid-item */
 .grid-item {
     display: flex;
     flex-direction: column;
@@ -31,7 +36,12 @@
     justify-content: center;
     align-items: center;    
     text-align: center;     
+    padding: 10px; /* Spasi internal tetap */
+    background-color: transparent; /* Atur warna latar belakang transparan */
+    border: none; /* Hapus batas */
+    box-shadow: none; /* Hapus bayangan */
 }
+
 
 .label {
     color: #B193B0;
@@ -48,9 +58,10 @@
     color: #4CAF50;
 }
 
+/* Responsif untuk layar sedang */
 @media (max-width: 768px) {
     .reservation-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Lebih fleksibel */
     }
     
     .main-card {
@@ -59,6 +70,7 @@
     }
 }
 
+/* Responsif untuk layar kecil */
 @media (max-width: 480px) {
     .reservation-grid {
         grid-template-columns: 1fr;
@@ -70,6 +82,7 @@
     }
 }
 
+/* Tombol Extend */
 .Extends-btn {
     background: #a98eb2;
     color: #fff;
@@ -77,7 +90,6 @@
     border-radius: 20px;
     padding: 0.55rem 1rem;
     margin-top: 10px;
-    margin-left: 45px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -85,7 +97,8 @@
     align-items: center;    
     text-align: center; 
     display: flex;
-  }
+}
 
-  
-  
+.Extends-btn:hover {
+    background: #8a7293;
+}

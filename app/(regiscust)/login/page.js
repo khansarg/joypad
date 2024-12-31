@@ -51,7 +51,7 @@ export default function LoginPage() {
         if (data.role === "Customer") {
           router.push("/customer/homepage"); // Halaman homepage customer
         } else if (data.role === "Admin") {
-          router.push("/admin/homepage"); // Halaman homepage admin
+          router.push("/admin/home_admin"); // Halaman homepage admin
         } else {
           setError("Unknown role.");
         }

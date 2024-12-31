@@ -6,10 +6,12 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  padding: 4120px 500px;
-  margin: 0;
+  padding-top: 100px;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #A98EB2, #D8B4E2);
+}
+
+header{
+    top: 0px;
 }
 
 .formTitle {
@@ -193,5 +195,4 @@ color: #6c567b;
 .customButton.large {
   width: 150px; /* Panjang yang bisa Anda atur */
 }
-
 
