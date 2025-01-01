@@ -257,6 +257,9 @@ const ReservationList = () => {
         <main className="w-full max-w-7xl px-4">
           <div className="mb-6 flex justify-between items-center">
             <h2 className="text-2xl font-semibold">Daftar Reservasi</h2>
+            <button className="px-4 py-2 rounded-[20px] text-white">
+              <a href="/admin/add_admin">+ Tambah Reservasi</a>
+            </button>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
