@@ -40,7 +40,7 @@ export default function SignupPage() {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/api/customer/register", {
+      const response = await fetch("https://joypadjourney-be-production.up.railway.app/api/customer/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -8,7 +8,7 @@ const fetchAvailableRooms = async (startDateTime, endDateTime) => {
   try {
     const token = localStorage.getItem("token");
     const response = await fetch(
-      `http://localhost:8080/api/reservations/available-rooms?startDateTime=${startDateTime}&endDateTime=${endDateTime}`,
+      `https://joypadjourney-be-production.up.railway.app/api/reservations/available-rooms?startDateTime=${startDateTime}&endDateTime=${endDateTime}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -31,7 +31,7 @@ const fetchAvailableRooms = async (startDateTime, endDateTime) => {
 const createReservation = async (reservation) => {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch("http://localhost:8080/api/reservations/reservations", {
+    const response = await fetch("https://joypadjourney-be-production.up.railway.app/api/reservations/reservations", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ const createReservation = async (reservation) => {
 const confirmPayment = async (reservationID) => {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch("http://localhost:8080/api/payments/confirm", {
+    const response = await fetch("https://joypadjourney-be-production.up.railway.app/api/payments/confirm", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

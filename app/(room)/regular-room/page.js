@@ -31,7 +31,7 @@ const RegularRoom = () => {
           }
         const fetchRoomDetails = async () => {
           try {
-            const response = await fetch("http://localhost:8080/api/reservations/room-details?roomName=Regular", {
+            const response = await fetch("https://joypadjourney-be-production.up.railway.app/api/reservations/room-details?roomName=Regular", {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`, // Pastikan token disimpan di localStorage
                 "Content-Type": "application/json",

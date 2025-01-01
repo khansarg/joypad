@@ -20,7 +20,7 @@ const Header = () => {
       const token = localStorage.getItem("token");
       if (token) {
         try {
-          const response = await fetch("http://localhost:8080/api/user/me", {
+          const response = await fetch("https://joypadjourney-be-production.up.railway.app/api/user/me", {
             headers: {
               Authorization: `Bearer ${token}`,
             },

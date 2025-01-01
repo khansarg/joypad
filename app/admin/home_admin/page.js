@@ -119,7 +119,7 @@ const ReservationList = () => {
   const fetchReservations = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:8080/api/admin/viewReservations", {
+      const response = await fetch("https://joypadjourney-be-production.up.railway.app/api/admin/viewReservations", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -153,7 +153,7 @@ const ReservationList = () => {
     if (reservationToDelete) {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch(`http://localhost:8080/api/reservations/reservations/${reservationToDelete}`, {
+        const response = await fetch(`https://joypadjourney-be-production.up.railway.app/api/reservations/reservations/${reservationToDelete}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -207,7 +207,7 @@ const ReservationList = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:8080/api/admin/reservations/${selectedReservation.reservationID}/extend`,
+          `https://joypadjourney-be-production.up.railway.app/api/admin/reservations/${selectedReservation.reservationID}/extend`,
           {
             method: "PUT",
             headers: {

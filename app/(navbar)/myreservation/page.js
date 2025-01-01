@@ -87,7 +87,7 @@ export default function ReservationPage() {
   const fetchReservations = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:8080/api/customer/reservations", {
+      const response = await fetch("https://joypadjourney-be-production.up.railway.app/api/customer/reservations", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -134,7 +134,7 @@ export default function ReservationPage() {
   
       try {
         const response = await fetch(
-          `http://localhost:8080/api/customer/reservations/${selectedReservation.reservationID}/extend`,
+          `https://joypadjourney-be-production.up.railway.app/api/customer/reservations/${selectedReservation.reservationID}/extend`,
           {
             method: "PUT",
             headers: {

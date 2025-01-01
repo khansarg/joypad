@@ -29,7 +29,7 @@ export default function LoginPage() {
     const isInputEmail = /\S+@\S+\.\S+/.test(username);
   
     try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
+      const response = await fetch("https://joypadjourney-be-production.up.railway.app/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

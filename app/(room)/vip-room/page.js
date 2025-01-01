@@ -34,7 +34,7 @@ const VipRoom = () => {
             const roomName = "VIP";
             console.log("Fetching details for room:", roomName);
       
-            const response = await fetch(`http://localhost:8080/api/reservations/room-details?roomName=${roomName}`, {
+            const response = await fetch(`https://joypadjourney-be-production.up.railway.app/api/reservations/room-details?roomName=${roomName}`, {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
                 "Content-Type": "application/json",

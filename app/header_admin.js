@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/header_admin.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Header_admin = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
+   const [username, setUsername] = useState("Guest");
   const pathname = usePathname();
 
   const toggleDropdown = () => {
@@ -18,7 +19,38 @@ const Header_admin = () => {
    const isLinkActive = (path) => {
     return pathname === path;
   };
-
+  useEffect(() => {
+      const fetchUserProfile = async () => {
+        const token = localStorage.getItem("token");
+        if (token) {
+          try {
+            const response = await fetch("https://joypadjourney-be-production.up.railway.app/api/user/me", {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+  
+            if (response.ok) {
+              const userData = await response.json();
+              console.log("User data:", userData);
+              setUsername(userData.username);
+              localStorage.setItem("username", userData.username)
+            } else {
+              console.error("Failed to fetch user profile");
+            }
+          } catch (error) {
+            console.error("Error fetching user profile:", error);
+          }
+        }
+      };
+  
+      fetchUserProfile();
+    }, []);
+  
+    const handleLogout = () => {
+      localStorage.clear();
+      window.location.href = "/";
+    };
   return (
     <header>
       <div className="navbar">
@@ -63,14 +95,14 @@ const Header_admin = () => {
           <div className="user-profile">
             <li>
               <a className="username" id="username" onClick={toggleDropdown}>
-                admin
+                {username}
               </a>
               <div
                 className={`dropdown-content ${
                   dropdownVisible ? "visible" : ""
                 }`}
               >
-                <a href="/">Log Out</a>
+                <a href="/" onClick={handleLogout}>Log Out</a>
               </div>
             </li>
           </div>

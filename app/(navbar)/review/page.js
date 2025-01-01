@@ -26,7 +26,7 @@ const Review = () => {
       }
 
       try {
-        const reviewsResponse = await fetch("http://localhost:8080/customer/reviews/viewReviews", {
+        const reviewsResponse = await fetch("https://joypadjourney-be-production.up.railway.app/customer/reviews/viewReviews", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -40,7 +40,7 @@ const Review = () => {
         const reviewsData = await reviewsResponse.json();
         setReviews(reviewsData);
 
-        const reservationsResponse = await fetch("http://localhost:8080/api/customer/reservations/completedAndNotReviewed", {
+        const reservationsResponse = await fetch("https://joypadjourney-be-production.up.railway.app/api/customer/reservations/completedAndNotReviewed", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -66,7 +66,7 @@ const Review = () => {
   const handleAddReview = async () => {
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch(`http://localhost:8080/customer/reviews/${selectedReservationID}`, {
+      const response = await fetch(`https://joypadjourney-be-production.up.railway.app/customer/reviews/${selectedReservationID}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

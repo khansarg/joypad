@@ -82,7 +82,7 @@ const findRoom = () => {
         console.log("Fetching rooms with:", { startDateTime, endDateTime });
   
         const response = await fetch(
-          `http://localhost:8080/api/reservations/available-rooms?startDateTime=${startDateTime}&endDateTime=${endDateTime}`,
+          `https://joypadjourney-be-production.up.railway.app/api/reservations/available-rooms?startDateTime=${startDateTime}&endDateTime=${endDateTime}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

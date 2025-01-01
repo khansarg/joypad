@@ -15,7 +15,7 @@ const AdminReview = () => {
         try {
             const token = localStorage.getItem('token');
             console.log('Token:', token);
-            const response = await fetch('http://localhost:8080/api/admin/viewReviews', {
+            const response = await fetch('https://joypadjourney-be-production.up.railway.app/api/admin/viewReviews', {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,
