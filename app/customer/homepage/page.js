@@ -119,7 +119,7 @@ export default function HomePage() {
       {/* Bagian Rules */}
       <section id="rules" className="section rules-section">
         <video
-          src="/Neon Sci Fi Gaming YouTube Video Intro (3).mp4"
+          src="/homevid.mp4"
           className="rules-video"
           autoPlay
           loop

@@ -117,7 +117,7 @@ export default function ReservationPage() {
     // Validasi waktu
     if (currentTime < reservationStartTime || currentTime > extendDeadline || reservation.status !== "PAID") {
       alert(
-        "You can only extend your reservation within the valid time range: after it starts and up to 30 minutes before it ends."
+        "You can only extend your reservation within the valid time range: after it starts and up to 30 minutes before it ends and you can only do the extends once. If you want to play again, please make a new reservation. Thank you!"
       );
       return;
     }
@@ -130,7 +130,9 @@ export default function ReservationPage() {
   const handleExtendConfirm = async (untilTime) => {
     if (selectedReservation) {
       const token = localStorage.getItem("token");
-      const newEnd = `${selectedReservation.startDateTime.split('T')[0]}T${untilTime}:00`;
+      const newEnd = new Date(
+        `${selectedReservation.startDateTime.split('T')[0]}T${untilTime}:00`
+      ).toISOString().slice(0, -1);
   
       try {
         const response = await fetch(
