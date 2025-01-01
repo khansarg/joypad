@@ -35,7 +35,7 @@ const Pembayaran = () => {
     }
   
     try {
-      const response = await fetch("http://localhost:8080/api/payments/confirm", {
+      const response = await fetch("https://joypadjourney-be-production.up.railway.app/api/payments/confirm", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

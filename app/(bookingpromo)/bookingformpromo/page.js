@@ -45,7 +45,7 @@ const BookingForm = () => {
           throw new Error("No access token found. Please log in.");
         }
     
-        const response = await fetch(`http://localhost:8080/api/reservations/room-details?roomName=${room}`, {
+        const response = await fetch(`https://joypadjourney-be-production.up.railway.app/api/reservations/room-details?roomName=${room}`, {
           headers: {
             Authorization: `Bearer ${token}`, // Tambahkan token JWT di header Authorization
             "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const BookingForm = () => {
           endDateTime: endDateTime,
         };
 
-        const priceResponse = await fetch("http://localhost:8080/api/reservations/reservations", {
+        const priceResponse = await fetch("https://joypadjourney-be-production.up.railway.app/api/reservations/reservations", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -153,7 +153,7 @@ const BookingForm = () => {
       }
 
       // Hapus reservasi di backend
-      const response = await fetch(`http://localhost:8080/api/reservations/reservations/${reservationID}`, {
+      const response = await fetch(`https://joypadjourney-be-production.up.railway.app/api/reservations/reservations/${reservationID}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
