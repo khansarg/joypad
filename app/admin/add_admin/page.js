@@ -131,7 +131,7 @@ const ReservationList = () => {
       const [fromTime, untilTime] = time.split(" - ");
       const startDateTime = `${date}T${fromTime}:00`;
       const endDateTime = `${date}T${untilTime}:00`;
-
+      
       try {
         // Create reservation
         const reservation = { room, startDateTime, endDateTime };
@@ -188,12 +188,27 @@ const ReservationList = () => {
   };
 
   const handleTimeSelection = (from, until) => {
+    const isMinuteValid = (time) => {
+        const [, minute] = time.split(':');
+        return minute === '00'; // Validasi menit
+    };
+
+    if (!isMinuteValid(from) || !isMinuteValid(until)) {
+        alert("Both start and end times must have minutes set to 00. Please correct your input.");
+        return;
+    }
+
+    if (from >= until) {
+        alert("Start time must be earlier than end time. Please correct your input.");
+        return;
+    }
+
     setReservations((prev) => {
-      const lastReservation = { ...prev[prev.length - 1], time: `${from} - ${until}` };
-      return [...prev.slice(0, -1), lastReservation];
+        const lastReservation = { ...prev[prev.length - 1], time: `${from} - ${until}` };
+        return [...prev.slice(0, -1), lastReservation];
     });
     setShowTimePopup(false);
-  };
+};
 
   return (
     <div className="min-h-screen bg-white">
@@ -344,46 +359,65 @@ const CalendarPopup = ({ onSelectDate, onClose }) => (
 const TimePopup = ({ onSelectTime, onClose }) => {
   const [fromTime, setFromTime] = useState('');
   const [untilTime, setUntilTime] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const validateAndConfirm = () => {
+      const isMinuteValid = (time) => {
+          const [, minute] = time.split(':');
+          return minute === '00'; // Validasi menit
+      };
+
+      if (!isMinuteValid(fromTime) || !isMinuteValid(untilTime)) {
+          setErrorMessage("Both start and end times must have minutes set to 00.");
+          return;
+      }
+
+      if (fromTime >= untilTime) {
+          setErrorMessage("Start time must be earlier than end time.");
+          return;
+      }
+
+      onSelectTime(fromTime, untilTime);
+      onClose();
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-2xl p-6 w-[400px] max-w-[90%]">
-        <h2 className="text-xl font-semibold mb-4 text-black">Select Time</h2>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-black-700 mb-1">From</label>
-          <input
-            type="time"
-            value={fromTime}
-            onChange={(e) => setFromTime(e.target.value)}
-            className="w-full p-2 border rounded-[10px] text-black"
-          />
+        <div className="bg-white rounded-2xl p-6 w-[400px] max-w-[90%]">
+            <h2 className="text-xl font-semibold mb-4 text-black">Select Time</h2>
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-black-700 mb-1">From</label>
+                <input
+                    type="time"
+                    value={fromTime}
+                    onChange={(e) => setFromTime(e.target.value)}
+                    className="w-full p-2 border rounded-[10px] text-black"
+                />
+            </div>
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-black-700 mb-1">Until</label>
+                <input
+                    type="time"
+                    value={untilTime}
+                    onChange={(e) => setUntilTime(e.target.value)}
+                    className="w-full p-2 border rounded-[10px] text-black"
+                />
+            </div>
+            {errorMessage && <p className="text-red-500 text-sm mb-2">{errorMessage}</p>}
+            <div className="flex justify-end gap-2">
+                <button
+                    onClick={validateAndConfirm}
+                    className="px-4 py-2 rounded-[20px] text-white bg-[#A98EB2]"
+                >
+                    Confirm
+                </button>
+                <button onClick={onClose} className="px-4 py-2 rounded-[20px] text-white bg-[#A98EB2]">
+                    Close
+                </button>
+            </div>
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-black-700 mb-1">Until</label>
-          <input
-            type="time"
-            value={untilTime}
-            onChange={(e) => setUntilTime(e.target.value)}
-            className="w-full p-2 border rounded-[10px] text-black"
-          />
-        </div>
-        <div className="flex justify-end gap-2">
-          <button
-            onClick={() => {
-              onSelectTime(fromTime, untilTime);
-              onClose();
-            }}
-            className="px-4 py-2 rounded-[20px] text-white bg-[#A98EB2]"
-          >
-            Confirm
-          </button>
-          <button onClick={onClose} className="px-4 py-2 rounded-[20px] text-white bg-[#A98EB2]">
-            Close
-          </button>
-        </div>
-      </div>
     </div>
-  );
+);
 };
 
 const PaymentSuccessModal = ({ onClose }) => (

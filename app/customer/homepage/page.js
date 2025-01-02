@@ -97,6 +97,10 @@ export default function HomePage() {
                 alert("Please select a valid date and time.");
                 return;
               }
+              if (fromTime >= untilTime){
+                alert("Start time cannot be the same or before end time.");
+                return;
+              }
             
               const startDateTime = `${selectedDate.toLocaleDateString("sv-SE")}T${fromTime}:00`;
               const endDateTime = `${selectedDate.toLocaleDateString("sv-SE")}T${untilTime}:00`;

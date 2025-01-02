@@ -111,7 +111,7 @@ const AdminReview = () => {
         {/* Review Cards */}
         <div className="space-y-4">
           {reviews.map((review) => (
-            <div key={review.id || review.reviewid} className="bg-[#EBDFEF] rounded-[24px] p-8">
+            <div key={review.reviewid} className="bg-[#EBDFEF] rounded-[24px] p-8">
               <div className="flex justify-between items-start mb-4">
                 <div className="flex items-center gap-3">
                   <img

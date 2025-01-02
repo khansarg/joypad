@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "../../../styles/pembayaranpromo.css";
 import Header from "../../header";
+import { useRouter } from "next/navigation";
 const Pembayaran = () => {
   const [reservationID, setReservationID] = useState("");
   const [room, setRoom] = useState("");
@@ -13,6 +14,7 @@ const Pembayaran = () => {
   const [total, setTotal] = useState(0);
   const [pricePerHour, setPrice] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
+  const router = useRouter();
   useEffect(() => {
     // Ambil data dari localStorage
     setReservationID(localStorage.getItem("reservationID") || "");
@@ -53,6 +55,9 @@ const Pembayaran = () => {
   
       // Tampilkan popup konfirmasi pembayaran
       setShowPopup(true);
+      setTimeout(() => {
+        router.push("/myreservation");
+      }, 2000);
     } catch (error) {
       console.error("Error confirming payment:", error.message);
       alert("Payment failed. Please try again.");

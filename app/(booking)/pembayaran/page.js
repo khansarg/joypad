@@ -1,12 +1,16 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import "../../../styles/pembayaran.css";
 import Header from "../../header";
 const BookingForm = () => {
   const [showPopup, setShowPopup] = useState(false);
-
+  const router = useRouter();
   const handleNext = () => {
     setShowPopup(true);
+    setTimeout(() => {
+      router.push("/myreservation");
+    }, 2000);
   };
 
   const handleClosePopup = () => {
@@ -78,7 +82,7 @@ const BookingForm = () => {
               </div>
               <h2>Payment Successfully!</h2>
               <p>
-                <a href="/reservation">Check your reservation</a>
+                <a href="/myreservation">Check your reservation</a>
               </p>
               <button className="closeButton" onClick={handleClosePopup}>
                 Close

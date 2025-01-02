@@ -14,51 +14,53 @@ const Review = () => {
   const [selectedReservationID, setSelectedReservationID] = useState("");
   const [modalRating, setModalRating] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
+  const [modalComment, setModalComment] = useState("");
+
   const modalReviewRef = useRef(""); // Gunakan useRef untuk textarea
+  const fetchReviewsAndReservations = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("User is not authenticated. Please log in.");
+      setLoading(false);
+      return;
+    }
 
+    try {
+      const reviewsResponse = await fetch("https://joypadjourney-be-production.up.railway.app/customer/reviews/viewReviews", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!reviewsResponse.ok) {
+        throw new Error("Failed to fetch reviews");
+      }
+
+      const reviewsData = await reviewsResponse.json();
+      setReviews(reviewsData);
+
+      const reservationsResponse = await fetch("https://joypadjourney-be-production.up.railway.app/api/customer/reservations/completedAndNotReviewed", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!reservationsResponse.ok) {
+        throw new Error("Failed to fetch reservations");
+      }
+
+      const reservationsData = await reservationsResponse.json();
+      setReservations(reservationsData);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchReviewsAndReservations = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setError("User is not authenticated. Please log in.");
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const reviewsResponse = await fetch("https://joypadjourney-be-production.up.railway.app/customer/reviews/viewReviews", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!reviewsResponse.ok) {
-          throw new Error("Failed to fetch reviews");
-        }
-
-        const reviewsData = await reviewsResponse.json();
-        setReviews(reviewsData);
-
-        const reservationsResponse = await fetch("https://joypadjourney-be-production.up.railway.app/api/customer/reservations/completedAndNotReviewed", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!reservationsResponse.ok) {
-          throw new Error("Failed to fetch reservations");
-        }
-
-        const reservationsData = await reservationsResponse.json();
-        setReservations(reservationsData);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+    
 
     fetchReviewsAndReservations();
   }, []);
@@ -92,7 +94,9 @@ const Review = () => {
     } catch (error) {
       setErrorMessage(error.message);
     }
+    fetchReviewsAndReservations();
   };
+  
 
   const calculateAverageRating = () => {
     if (reviews.length === 0) return 0;
@@ -157,7 +161,7 @@ const Review = () => {
               </div>
               <textarea
                 placeholder="Tell us about your experience..."
-                defaultValue="" // Gunakan defaultValue agar tidak memicu re-render
+                defaultValue={modalComment} // Gunakan defaultValue agar tidak memicu re-render
                 onChange={(e) => (modalReviewRef.current = e.target.value)} // Simpan nilai langsung di useRef
                 className="w-full p-2 border rounded-[10px] h-32"
               />
@@ -246,7 +250,7 @@ const Review = () => {
         <div className="space-y-4">
           {reviews.map((review) => (
             <div
-              key={review.reviewid}
+              key={String(review.reviewid)}
               className="bg-[#EBDFEF] rounded-[24px] p-8"
             >
               <div className="flex justify-between items-start mb-4">
