@@ -17,7 +17,7 @@ const Notifications = () => {
           throw new Error("Username not found in localStorage.");
         }
 
-        const response = await fetch(`http://localhost:8080/api/customer/notifications/${username}`, {
+        const response = await fetch(`https://joypadjourney-be-production.up.railway.app/api/customer/notifications/${username}`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",

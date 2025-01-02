@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Header_admin from '@/app/header_admin';
+import "../../../styles/add_admin.css";
 import { useRouter } from 'next/router';
 
 const fetchAvailableRooms = async (startDateTime, endDateTime) => {
@@ -201,9 +202,9 @@ const ReservationList = () => {
       </div>
       <div className="flex justify-center pt-[100px]">
         <main className="w-full max-w-7xl px-4">
-          <div className="bg-purple-100 rounded-3xl p-6 shadow-sm">
+          <div className="card-style">
             <div className="mb-6 flex justify-between items-center">
-              <h2 className="text-xl font-medium text-gray-700">Daftar Reservasi</h2>
+              <h2 className="text-2xl font-semibold text-black">Daftar Reservasi</h2>
               <div className="flex gap-2">
                 <button className="px-4 py-2 rounded-[20px] text-white bg-[#A98EB2]" >
                   <a href="/admin/home_admin"> Cancel </a>
@@ -224,8 +225,8 @@ const ReservationList = () => {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="text-left text-gray-600">
-                    <th className="pb-4 text-gray-600">Reservation ID</th>
+                  <tr className="text-left text-gray-900">
+                    <th className="pb-4 text-gray-900">Reservation ID</th>
                     <th
                       onClick={() => handleHeaderClick('Date')}
                       className="pb-4 cursor-pointer text-black-600 hover:underline"
@@ -329,7 +330,7 @@ const CalendarPopup = ({ onSelectDate, onClose }) => (
       <input
         type="date"
         onChange={(e) => onSelectDate(e.target.value)}
-        className="w-full p-2 border rounded-[10px] text-gray"
+        className="w-full p-2 border rounded-[10px] text-black"
       />
       <div className="flex justify-end mt-4">
         <button onClick={onClose} className="px-4 py-2 rounded-[20px] text-white bg-[#A98EB2]">
@@ -349,21 +350,21 @@ const TimePopup = ({ onSelectTime, onClose }) => {
       <div className="bg-white rounded-2xl p-6 w-[400px] max-w-[90%]">
         <h2 className="text-xl font-semibold mb-4 text-black">Select Time</h2>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">From</label>
+          <label className="block text-sm font-medium text-black-700 mb-1">From</label>
           <input
             type="time"
             value={fromTime}
             onChange={(e) => setFromTime(e.target.value)}
-            className="w-full p-2 border rounded-[10px] text-gray"
+            className="w-full p-2 border rounded-[10px] text-black"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Until</label>
+          <label className="block text-sm font-medium text-black-700 mb-1">Until</label>
           <input
             type="time"
             value={untilTime}
             onChange={(e) => setUntilTime(e.target.value)}
-            className="w-full p-2 border rounded-[10px] text-gray"
+            className="w-full p-2 border rounded-[10px] text-black"
           />
         </div>
         <div className="flex justify-end gap-2">

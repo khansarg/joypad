@@ -21,7 +21,7 @@ const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm }) => {
           </button>
           <button
             onClick={onConfirm}
-            className="px-4 py-2 rounded-[20px] text-white bg-pink-400"
+            className="px-4 py-2 rounded-[20px] text-white bg-mauve-400"
           >
             Yes
           </button>
@@ -59,7 +59,7 @@ const ExtendModal = ({ reservation, onClose, onConfirm }) => {
           <div className="flex justify-end">
             <button
               onClick={onClose}
-              className="px-4 py-2 rounded-[20px] text-white bg-pink-400"
+              className="px-4 py-2 rounded-[20px] text-white bg-mauve-400"
             >
               Close
             </button>
@@ -97,7 +97,7 @@ const ExtendModal = ({ reservation, onClose, onConfirm }) => {
           </button>
           <button
             onClick={handleSubmit}
-            className="px-4 py-2 rounded-[20px] text-white bg-pink-400"
+            className="px-4 py-2 rounded-[20px] text-white bg-mauve-400"
           >
             Confirm
           </button>
@@ -258,8 +258,7 @@ const ReservationList = () => {
           <div className="mb-6 flex justify-between items-center">
             <h2 className="text-2xl font-semibold">Daftar Reservasi</h2>
             <button className="px-4 py-2 rounded-[20px] text-white">
-              <a href="/admin/add_admin">+ Tambah Reservasi</a>
-            </button>
+              <a href="/admin/add_admin">+ Tambah Reservasi</a></button>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
@@ -293,7 +292,7 @@ const ReservationList = () => {
                       </button>
                       <button
                         onClick={() => handleExtendClick(reservation)}
-                        className="px-4 py-2 rounded-[20px] text-white bg-pink-400"
+                        className="px-4 py-2 rounded-[20px] text-white bg-mauve-400"
                       >
                         Extend
                       </button>
