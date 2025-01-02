@@ -253,7 +253,7 @@ const Review = () => {
                 <div className="flex items-center gap-3">
                   <img
                     src="image/user.png"
-                    alt={review.user.username}
+                    alt={review.user?.username}
                     className="w-10 h-10 rounded-full"
                   />
                   <div>

@@ -61,7 +61,7 @@ text-align: left;
 
 .extra {
 text-align: right;
-font-style: italic;
+font-style: italic; 
 color: #6c567b;
 }
 
@@ -78,6 +78,13 @@ color: #6c567b;
 .valuetot {
   text-align: right;
   margin-left: 220px;
+}
+
+.valuerek {
+  margin-left: -100x;
+  text-align: left;
+  margin-top: 15px;
+  color: white;
 }
 
 .divider {

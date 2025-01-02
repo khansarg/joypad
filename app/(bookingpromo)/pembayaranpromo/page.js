@@ -119,13 +119,17 @@ const Pembayaran = () => {
             <span className="separatortot">:</span>
             <span className="valuetot">Rp. {total.toLocaleString("id-ID")}</span>
           </div>
+          
           <div className="buttonGroup">
             <button className="customButton" onClick={handlePaymentConfirmation}>
               Bayar Sekarang
             </button>
           </div>
+          
         </div>
-
+        <div className="valuerek">
+            <span>We accept all payments via e-wallet dengan nomor: 08195672334.</span>
+          </div>
         {/* Popup */}
         {showPopup && (
           <div className="popupOverlay">
