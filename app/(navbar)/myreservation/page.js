@@ -37,7 +37,7 @@ const ExtendModal = ({ reservation, onClose, onConfirm }) => {
     try {
       await onConfirm(untilTime);
       setShowSuccess(true);
-    } catch (err) {
+    } catch (error) {
       alert(`Failed to extend reservation: ${err.message}`);
     }
   };
@@ -175,7 +175,8 @@ export default function ReservationPage() {
         setShowExtendModal(false);
         setSelectedReservation(null);
       } catch (error) {
-        alert(`Failed to extend reservation: ${error.message}`);
+          alert(`Gagal memperpanjang reservasi: Room tidak tersedia`);
+        
       }
     }
   };
