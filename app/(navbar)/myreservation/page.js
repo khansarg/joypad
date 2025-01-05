@@ -5,6 +5,7 @@ import Header from "../../header.js";
 import Footer from "../../footer.js";
 import "../../../styles/myreservation.css";
 
+
 const PaymentSuccessModal = ({ onClose }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -83,6 +84,7 @@ export default function ReservationPage() {
   const [error, setError] = useState(null);
   const [showExtendModal, setShowExtendModal] = useState(false);
   const [selectedReservation, setSelectedReservation] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const fetchReservations = async () => {
     try {
@@ -110,10 +112,10 @@ export default function ReservationPage() {
     const currentTime = new Date();
     const reservationStartTime = new Date(reservation.startDateTime);
     const reservationEndTime = new Date(reservation.endDateTime);
-
+  
     // Waktu maksimal untuk extend (30 menit sebelum akhir reservasi)
-    const extendDeadline = new Date(reservationEndTime.getTime() - 35 * 60 * 1000);
-
+    const extendDeadline = new Date(reservationEndTime.getTime() - 30 * 60 * 1000);
+  
     // Validasi waktu
     if (currentTime < reservationStartTime || currentTime > extendDeadline || reservation.status !== "PAID") {
       alert(
@@ -121,20 +123,24 @@ export default function ReservationPage() {
       );
       return;
     }
+  
 
-    // Jika validasi lolos, buka modal
+    setSelectedDate(new Date(reservation.startDateTime));
+  
+
     setSelectedReservation(reservation);
     setShowExtendModal(true);
   };
+  
 
   const handleExtendConfirm = async (untilTime) => {
+  
+
     if (selectedReservation) {
-      const token = localStorage.getItem("token");
-      const newEnd = new Date(
-        `${selectedReservation.startDateTime.split('T')[0]}T${untilTime}:00`
-      ).toISOString().slice(0, -1);
+      const endDateTime = `${selectedDate.toLocaleDateString("sv-SE")}T${untilTime}:00`;
   
       try {
+        const token = localStorage.getItem("token");
         const response = await fetch(
           `https://joypadjourney-be-production.up.railway.app/api/customer/reservations/${selectedReservation.reservationID}/extend`,
           {
@@ -144,7 +150,7 @@ export default function ReservationPage() {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              newEnd,
+              newEnd: endDateTime,
               roomName: selectedReservation.room.roomName,
             }),
           }
@@ -173,6 +179,7 @@ export default function ReservationPage() {
       }
     }
   };
+  
   
   
 

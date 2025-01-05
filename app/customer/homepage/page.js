@@ -9,7 +9,7 @@ import "react-calendar";
 // Fungsi untuk generate opsi waktu
 function generateTimeOptions() {
   const times = [];
-  for (let hour = 10; hour <= 19; hour++) {
+  for (let hour = 10; hour <= 23; hour++) {
     const time = `${hour}:00`;
     times.push(
       <option key={time} value={time}>
